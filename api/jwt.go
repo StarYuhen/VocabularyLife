@@ -15,10 +15,12 @@ import (
 // JwtPO 自定义jwt参数
 type jwtPO struct {
 	User string `json:"user"`
+
 	jwt.StandardClaims
 }
 
-const TokenExpireDuration = time.Hour * 10000
+// TokenExpireDuration 设置为100天，一次用户登录有效期
+const TokenExpireDuration = time.Hour * 2400
 
 var MySecret = []byte("StarYuhen")
 

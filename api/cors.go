@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-// 设置允许跨域请求函数
+// 设置允许跨域请求 中间件
 func cors() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		method := context.Request.Method

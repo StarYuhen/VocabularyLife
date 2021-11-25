@@ -4,6 +4,5 @@ package flow
 func SelectAccount(uid int) adminaccount {
 	var account adminaccount
 	db.Where("uid=?", uid).First(&account)
-
 	return account
 }
