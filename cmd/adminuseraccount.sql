@@ -1,4 +1,4 @@
-create table adminuseraccount
+create table adminaccounts
 (
     ID                  smallint,
     uid                 smallint           not null,
@@ -14,24 +14,25 @@ create table adminuseraccount
 )
     comment '词汇人生账号主数据库';
 
-create unique index adminuseraccount_ID_uindex
-    on adminuseraccount (ID);
+create unique index adminaccounts_ID_uindex
+    on adminaccounts (ID);
 
-alter table adminuseraccount
-    add constraint adminuseraccount_pk
+alter table adminaccounts
+    add constraint adminaccounts_pk
         primary key (ID);
 
-alter table adminuseraccount
+alter table adminaccounts
     modify ID smallint auto_increment;
 
-alter table adminuseraccount
+alter table adminaccounts
     add WordLimit int default 600 not null;
 
-alter table adminuseraccount
+alter table adminaccounts
     add PlannedWords int default 0 not null;
 
-alter table adminuseraccount
+alter table adminaccounts
     add UsedWords int default 0 not null;
 
-
+create unique index adminaccounts_uid_uindex
+    on adminaccounts (uid);
 
