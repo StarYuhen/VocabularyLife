@@ -1,0 +1,75 @@
+{
+    "easycom": {
+        // 下载安装的方式需要前面的"@/"，npm安装的方式无需"@/"
+        // npm安装方式
+         "^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+    },	
+	
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "复习页面"
+			}
+		},{
+			"path":"pages/Dictionary/Dictionary",
+			"style":{
+				"navigationBarTitleText":"选词页面"
+			}
+		},{
+			"path":"pages/Statistics/Statistics",
+			"style":{
+				"navigationBarTitleText":"统计页面"
+			}
+		},{
+			"path":"pages/SetUp/SetUp",
+			"style":{
+				"navigationBarTitleText":"设置页面"
+			}
+		}
+        ,{
+            "path" : "pages/SetUp/PersonalData",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "个人资料",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar":{
+		"color":"#333333", //默认显示的颜色
+		"selectedColor":"#71d5a1", //选择该栏后显示得颜色
+		"borderStyle":"black",
+		"backgroundColor":"#FFFFFF",  //tabar背景颜色
+		"list":[
+			{
+			"pagePath":"pages/index/index",
+			"iconPath":"static/ioc/a-Group14.png",
+			"selectedIconPath":"static/ioc/a-Group14.png",
+			"text":"复习"
+		},{
+			"pagePath":"pages/Dictionary/Dictionary",
+			"iconPath":"static/ioc/a-Group21.png",
+			"selectedIconPath":"static/ioc/a-Group21.png",
+			"text":"选词"
+		},{
+			"pagePath":"pages/Statistics/Statistics",
+			"iconPath":"static/ioc/a-Group34.png",
+			"selectedIconPath":"static/ioc/a-Group34.png",
+			"text":"统计"
+		},{
+			"pagePath":"pages/SetUp/SetUp",
+			"iconPath":"static/ioc/a-Group25.png",
+			"selectedIconPath":"static/ioc/a-Group25.png",
+			"text":"设置"
+		}
+		]
+	}
+}

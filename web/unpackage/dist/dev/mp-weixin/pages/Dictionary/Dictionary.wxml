@@ -1,0 +1,1 @@
+<view><text>选词页面</text></view>
