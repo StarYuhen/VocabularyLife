@@ -86,3 +86,5 @@ func JWTAuthMiddleware() func(c *gin.Context) {
 		c.Next() // 后续的处理函数可以用过c.Get("username")来获取当前请求的用户信息
 	}
 }
+
+// 仅使用一次的中间件内容
