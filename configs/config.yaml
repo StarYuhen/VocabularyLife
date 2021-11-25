@@ -11,3 +11,5 @@ MYSQLConfig:
   # 指定数据库架构内的所有数据表
   UserDBTable:  # 定义数据表数组
   - 'adminaccounts'   # 用户数据表
+
+

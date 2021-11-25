@@ -1,7 +1,7 @@
 package main
 
 import (
-	"./configs"
+	"VocabularyLife/configs"
 	"github.com/sirupsen/logrus"
 )
 
