@@ -3,7 +3,7 @@ package main
 import (
 	"./interface/server"
 	"fmt"
-	_ "github.com/codyguo/godaemon"  // 导入的后台运行库
+	_ "github.com/codyguo/godaemon" // 导入的后台运行库
 	"github.com/gin-gonic/gin"
 	"net/http"
 )

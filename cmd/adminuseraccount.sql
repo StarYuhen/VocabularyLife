@@ -1,4 +1,4 @@
-create table AdminUserAccount
+create table adminuseraccount
 (
     ID                  smallint,
     uid                 smallint           not null,
@@ -14,14 +14,14 @@ create table AdminUserAccount
 )
     comment '词汇人生账号主数据库';
 
-create unique index AdminUserAccount_ID_uindex
-    on AdminUserAccount (ID);
+create unique index adminuseraccount_ID_uindex
+    on adminuseraccount (ID);
 
-alter table AdminUserAccount
-    add constraint AdminUserAccount_pk
+alter table adminuseraccount
+    add constraint adminuseraccount_pk
         primary key (ID);
 
-alter table AdminUserAccount
+alter table adminuseraccount
     modify ID smallint auto_increment;
 
 alter table adminuseraccount

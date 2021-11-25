@@ -1,13 +1,11 @@
+# 全局配置文件yaml
 # mysql 数据库配置内容
 MYSQL:
   # 配置顺序信息  UserConfig账号-密码-数据库架构
   UserConfig:
     User: root
     Password: abc123456
-    Architecture: VocabularyLife
+    Architecture: vocabularyife  #全部转为小写 VocabularyLife
   # 指定数据库架构内的所有数据表
   UserDBTable:
-    DBTable_Admin: AdminUserAccount
-
-
-
+    DBTableAdmin: adminuseraccount   #adminUserAccount
