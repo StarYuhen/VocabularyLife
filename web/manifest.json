@@ -58,7 +58,7 @@
     },
     "mp-alipay" : {
         "usingComponents" : true,
-		"component2": true //使其支持支付宝小程序uview
+        "component2" : true //使其支持支付宝小程序uview
     },
     "mp-baidu" : {
         "usingComponents" : true
@@ -69,5 +69,8 @@
     "uniStatistics" : {
         "enable" : false
     },
-    "vueVersion" : "2"
+    "vueVersion" : "2",
+    "mp-qq" : {
+        "appid" : "123456"
+    }
 }
