@@ -7,6 +7,6 @@
     "vue": "^2.6.14"
   },
   "devDependencies": {
-    "uview-ui": "^2.0.6"
+    "uview-ui": "^1.8.4"
   }
 }

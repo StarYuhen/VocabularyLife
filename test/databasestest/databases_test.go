@@ -7,5 +7,8 @@ import (
 )
 
 func TestDatabase(t *testing.T) {
-	logrus.Info("查询指定数据字段的值-->", flow.SelectAccount(10086))
+	account := flow.SelectAccount("root", "root")
+	logrus.Info("查询指定数据字段的值-->", account)
+	logrus.Info("查询是否有指定信息的值", flow.ReadUserInfo(account.Uid))
+	flow.WriteUserInfo(account.Uid, "127.0.0.0", "")
 }

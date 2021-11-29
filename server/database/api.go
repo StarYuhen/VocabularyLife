@@ -4,6 +4,7 @@ import (
 	"VocabularyLife/configs"
 	"VocabularyLife/expend/cryptoapi"
 	"VocabularyLife/server"
+	"VocabularyLife/server/database/flow"
 	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
@@ -35,21 +36,21 @@ func POSTAccountLogin(ctx *gin.Context) {
 	// 将请求的内容进行解密
 
 	// 解析time内容
-	time := cryptoapi.RSAGet(login.Time)
+	timesrc := cryptoapi.RSAGet(login.Time)
 	data := cryptoapi.RSAGet(login.Data)
 	sign := cryptoapi.RSAGet(login.Sign)
 
-	logrus.Info("请求传入的结果值", string(time), string(data), string(sign))
+	logrus.Info("请求传入的结果值", string(timesrc), string(data), string(sign))
 
 	// 判断解析传参内容
-	if time == nil || data == nil || sign == nil {
+	if timesrc == nil || data == nil || sign == nil {
 		logrus.Error("解析登录加密参数错误")
 		ctx.JSON(http.StatusOK, server.MissingParametersFun("解析登录加密参数错误"))
 		return
 	}
 
 	// 将内容赋值给结构体
-	errTime := json.Unmarshal(time, &times)
+	errTime := json.Unmarshal(timesrc, &times)
 	errSign := json.Unmarshal(sign, &signs)
 	errData := json.Unmarshal(data, &datas)
 
@@ -61,10 +62,50 @@ func POSTAccountLogin(ctx *gin.Context) {
 
 	// 复杂至极的判断条件
 	if times.Time == datas.Time && datas.Time == signs.Time && times.Msg == cryptoconfig.Time && datas.Msg == cryptoconfig.Data {
-		// 当这些都满足时说明校监正常
-		// TODO 待完成条件都符合的问题
+		// 当这些都满足时说明校验正常
+
+		// 数据库判断是否有该用户 --当查询的值存在时说明有该用户
+		account := flow.SelectAccount(signs.User, signs.PassWord)
+
+		if account.User == "" {
+			logrus.Error("该用户不存在--->", account)
+			ctx.JSON(http.StatusOK, server.NotOwnedFun("请求的用户不存在"))
+			return
+		}
+
+		if account.User == signs.User {
+			// 生成jwt
+			jwt, err := GenToken(account.User, account.Uid)
+			if err != nil {
+				logrus.Error("生成jwt失败--->", err)
+				ctx.JSON(http.StatusOK, server.InternalErrorFun("生成jwt失败"))
+				return
+			}
+
+			logrus.Info("登录成功---->", account)
+
+			// 将内容提交给登录信息数据表
+
+			user := flow.ReadUserInfo(account.Uid)
+
+			// 第一次登录表缓存表数据
+			if user.Uid == "" {
+				flow.WriteUserInfo(account.Uid, datas.Ip, jwt)
+			} else if user.Uid == account.Uid {
+				// 说明不是第一次缓存数据了，需要刷新数据
+				flow.UpdateUserInfoIp(account.Uid, datas.Ip, jwt)
+			}
+
+			ctx.JSON(http.StatusOK, server.Success(account, jwt))
+			return
+		}
+
+		ctx.JSON(http.StatusOK, server.UnknownErrorFun("请求参数出现问题，引发未收录错误"))
+		return
+
 	}
 
 	logrus.Info("具体的值-->", times, datas, signs)
-
+	ctx.JSON(http.StatusOK, server.ParameterErrorFun("请求的参数错误，校监失败"))
+	return
 }

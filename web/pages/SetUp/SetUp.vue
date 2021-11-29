@@ -9,11 +9,11 @@
 			-->
 			<navigator url='/pages/SetUp/PersonalData'>
 			<view class="Account" hover-start-time="50" hover-stay-time="200" >
-				<u-image class="ImgSetup" width="150rpx" height="150rpx" shape="square" border-radius="30rpx"
+				<u--image class="ImgSetup" width="150rpx" height="150rpx" shape="square" border-radius="30rpx"
 					:src="Account.SrcLogin" :lazy-load="true" :fade="true" duration="450">
-					<u-loading slot="loading"></u-loading>
+					<u-loading-icon slot="loading"></u-loading-icon>
 					<view slot="error" style="font-size: 24rpx;">加载失败</view>
-					</u-image>
+					</u--image>
 				<view class="TextSetup">
 					<text id="SetUpName">{{Account.TextName}}</text>
 					<view class="TextDataSetUp">

@@ -6,6 +6,8 @@ const (
 	MissingParameters = -1 // 缺少参数
 	InternalError     = -2 // 内部错误
 	ParameterError    = -3 // 参数错误
+	UnknownError      = -4 // 未知错误
+	NotOwned          = -5 // 参数在内部未拥有或者不存在
 )
 
 // Return 返回值结果
@@ -46,6 +48,24 @@ func InternalErrorFun(msg string) Return {
 func ParameterErrorFun(msg string) Return {
 	return Return{
 		Code: ParameterError,
+		Data: nil,
+		Msg:  msg,
+	}
+}
+
+// UnknownErrorFun 未知错误
+func UnknownErrorFun(msg string) Return {
+	return Return{
+		Code: UnknownError,
+		Data: nil,
+		Msg:  msg,
+	}
+}
+
+// NotOwnedFun 参数内部不存在
+func NotOwnedFun(msg string) Return {
+	return Return{
+		Code: NotOwned,
 		Data: nil,
 		Msg:  msg,
 	}
