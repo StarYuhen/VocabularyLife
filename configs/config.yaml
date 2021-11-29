@@ -1,6 +1,21 @@
 # 全局配置文件yaml
 AppVersion: 1000
 
+# 服务器ip，端口等内容配置
+HTTPConfig:
+  # ip地址
+  Ip: 127.0.0.1
+  # 端口号
+  Port: 10
+
+# 接口加密Msg参数--重要接口
+CryptoConfig:
+  # Time字段的加密参数
+  Time: 520
+  # Data字段的加密参数
+  Data: 1314
+
+
 # mysql 数据库配置内容
 MYSQLConfig:
   # 配置顺序信息  UserConfig账号-密码-数据库架构

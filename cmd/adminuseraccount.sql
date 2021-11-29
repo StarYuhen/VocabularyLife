@@ -1,3 +1,4 @@
+# 主用户表数据
 create table adminaccounts
 (
     ID                  smallint,
@@ -35,4 +36,7 @@ alter table adminaccounts
 
 create unique index adminaccounts_uid_uindex
     on adminaccounts (uid);
+
+
+
 
