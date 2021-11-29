@@ -1,0 +1,50 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/Dictionary/Dictionary",
+    "pages/Statistics/Statistics",
+    "pages/SetUp/SetUp",
+    "pages/SetUp/PersonalData"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#333333",
+    "selectedColor": "#71d5a1",
+    "borderStyle": "black",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/ioc/a-Group14.png",
+        "selectedIconPath": "static/ioc/a-Group14.png",
+        "text": "复习"
+      },
+      {
+        "pagePath": "pages/Dictionary/Dictionary",
+        "iconPath": "static/ioc/a-Group21.png",
+        "selectedIconPath": "static/ioc/a-Group21.png",
+        "text": "选词"
+      },
+      {
+        "pagePath": "pages/Statistics/Statistics",
+        "iconPath": "static/ioc/a-Group34.png",
+        "selectedIconPath": "static/ioc/a-Group34.png",
+        "text": "统计"
+      },
+      {
+        "pagePath": "pages/SetUp/SetUp",
+        "iconPath": "static/ioc/a-Group25.png",
+        "selectedIconPath": "static/ioc/a-Group25.png",
+        "text": "设置"
+      }
+    ]
+  },
+  "usingComponents": {
+    "fix-2648": "/fix-2648"
+  }
+}

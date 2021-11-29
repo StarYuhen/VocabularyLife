@@ -21,7 +21,7 @@
 						<text id="SetUpLVL">LVL{{Account.TextLVL}}</text>
 					</view>
 				</view>
-				<u-icon name="arrow-right" size="40rpx" color="#c8c9cc" id="SetUpicon"></u-icon>
+				<u-icon name="arrow-right" size="30rpx" color="#c8c9cc" id="SetUpicon"></u-icon>
 			</view>
 			</navigator>
 
@@ -55,7 +55,7 @@
 					<view id="LearningView">当日复习的单词量+当日新学单词量</view>
 				</view>
 				<u-input id="Ufield" v-model="value" :type="type" :border="true" placeholder=" " border-color="#38b29b"
-					height="50" />
+					height="50"  />
 			</view>
 			<view id="DivLive"></view>
 
@@ -105,33 +105,36 @@
 		<view class="LearningSettingsInit">
 			<view class="DailyLearningTextClass">
 				<text id="DailyLearning_Text">更多设置</text>
-				<u-icon name="arrow-right" size="40rpx" color="#c8c9cc" id="SetUpiconList"></u-icon>
+				<u-icon name="arrow-right" size="30rpx" color="#c8c9cc" id="SetUpiconList"></u-icon>
 			</view>
 			<view id="DivLive"></view>
 
 			<view class="DailyLearningTextClass">
 				<text id="DailyLearning_Text">词汇量测试</text>
-				<u-icon name="arrow-right" size="40rpx" color="#c8c9cc" id="SetUpiconList"></u-icon>
+				<u-icon name="arrow-right" size="30rpx" color="#c8c9cc" id="SetUpiconList"></u-icon>
 			</view>
 			<view id="DivLive"></view>
 
 			<view class="DailyLearningTextClass">
 				<text id="DailyLearning_Text">邀请有礼</text>
-				<u-icon name="arrow-right" size="40rpx" color="#c8c9cc" id="SetUpiconList"></u-icon>
+				<u-icon name="arrow-right" size="30rpx" color="#c8c9cc" id="SetUpiconList"></u-icon>
 			</view>
 			<view id="DivLive"></view>
 
 			<view class="DailyLearningTextClass">
 				<text id="DailyLearning_Text">退出登录</text>
-				<u-icon name="arrow-right" size="40rpx" color="#c8c9cc" id="SetUpiconList"></u-icon>
+				<u-icon name="arrow-right" size="30rpx" color="#c8c9cc" id="SetUpiconList" hover-class="cell-hover-class"></u-icon>
 			</view>
 			<view id="DivLive"></view>
 			
-			<view class="DailyLearningTextClass">
-				<text id="DailyLearning_Text">关于</text>
-				<u-icon name="arrow-right" size="40rpx" color="#c8c9cc" id="SetUpiconList"></u-icon>
+			
+			<!-- 重复一行 DailyLearningTextClass，目的防止导航栏覆盖最后一行-->
+			<view class="DailyLearningTextClass-bottom">
+				<text id="DailyLearningTextCopyright"  >Words dictionary V1.0.00 (0000) RLC</text>
+				<text id="DailyLearningTextCopyright"  >Words lnc Copyright 2021</text>
+				<text id="DailyLearningTextCopyright"  >加入我们</text>
 			</view>
-			<view id="DivLive"></view>
+			
 
 		</view>
 
