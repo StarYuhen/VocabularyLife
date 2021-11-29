@@ -2,10 +2,11 @@ package configs
 
 // 定义框架结构体
 type config struct {
-	AppVersion   int         `yaml:"AppVersion" json:"AppVersion"`
-	HTTPConfig   httplocal   `yaml:"HTTPConfig" json:"HTTPConfig"`
-	CryptoConfig cryptolocal `yaml:"CryptoConfig" json:"CryptoConfig"`
-	MysqlConfig  mysql       `yaml:"MYSQLConfig" json:"MYSQLConfig"`
+	AppVersion    int         `yaml:"AppVersion" json:"AppVersion"`
+	HTTPConfig    httplocal   `yaml:"HTTPConfig" json:"HTTPConfig"`
+	CryptoConfig  cryptolocal `yaml:"CryptoConfig" json:"CryptoConfig"`
+	CaptchaConfig captcha     `yaml:"CaptchaConfig" json:"CaptchaConfig"`
+	MysqlConfig   mysql       `yaml:"MYSQLConfig" json:"MYSQLConfig"`
 }
 
 // mysql配置环境
@@ -31,4 +32,11 @@ type httplocal struct {
 type cryptolocal struct {
 	Time int `yaml:"Time"`
 	Data int `yaml:"Data"`
+}
+
+// 图形验证码配置
+type captcha struct {
+	NumberKeyLong int `yaml:"NumberKeyLong" json:"NumberKeyLong"`
+	ImgWidth      int `yaml:"ImgWidth" json:"ImgWidth"`
+	ImgHeight     int `yaml:"ImgHeight" json:"ImgHeight"`
 }

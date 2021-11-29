@@ -16,6 +16,16 @@ CryptoConfig:
   Data: 1314
 
 
+# Captcha 生成图形验证码 --(当前拥有类型数字验证码)
+CaptchaConfig:
+# 生成的数字验证码的数字个数
+  NumberKeyLong: 6
+  # 图形验证码的宽度
+  ImgWidth: 240
+  # 图形验证码的长度
+  ImgHeight: 80
+
+
 # mysql 数据库配置内容
 MYSQLConfig:
   # 配置顺序信息  UserConfig账号-密码-数据库架构
