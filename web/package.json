@@ -1,0 +1,12 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "jsencrypt": "^3.2.1",
+    "vue": "^2.6.14"
+  },
+  "devDependencies": {
+    "uview-ui": "^2.0.6"
+  }
+}

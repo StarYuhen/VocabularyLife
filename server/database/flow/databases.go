@@ -25,7 +25,7 @@ func sqlInit() *gorm.DB {
 	sql, err := SQL.DB()
 
 	// 设置最大连接数 默认为0 也就是没有限制
-	sql.SetMaxOpenConns(1000)
+	sql.SetMaxOpenConns(0)
 	// 设置最大空闲连接 每次执行完语句都将连接放入连接池，默认为2
 	sql.SetConnMaxIdleTime(100)
 	return SQL

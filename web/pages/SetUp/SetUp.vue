@@ -176,7 +176,7 @@
 		},
 		onLoad(opention) {
 			// 这里时同步函数，页面渲染完后会立即渲染的函数
-			setupJs.AccountLoad(this.Account);
+			// setupJs.AccountLoad(this.Account);
 		},
 		methods: {
 			// AccountClick: setupJs.AccountClick,
