@@ -3,6 +3,8 @@ package database
 // 数据库请求的内容和响应的数据
 
 // Login 登录接口传参数据
+// CaptchaID     string `json:"captcha"`
+// CaptchaNumber string `json:"CaptchaNumber"`
 type Login struct {
 	Sign string `json:"sign"`
 	Data string `json:"data"`

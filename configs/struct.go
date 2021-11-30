@@ -46,7 +46,7 @@ type captcha struct {
 type redis struct {
 	Addr         string `yaml:"Addr" json:"Addr"`
 	Password     string `yaml:"Password" json:"Password"`
-	DB           int    `yaml:"DB" json:"DB"`
+	DB           []int  `yaml:"DB" json:"DB"`
 	PoolSize     int    `yaml:"PoolSize" json:"PoolSize"`
 	MinIdleConns int    `yaml:"MinIdleConns" json:"MinIdleConns"`
 }

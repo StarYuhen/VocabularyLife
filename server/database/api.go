@@ -5,6 +5,7 @@ import (
 	"VocabularyLife/expend/HttpResult"
 	"VocabularyLife/expend/cryptoapi"
 	"VocabularyLife/expend/jwt"
+	"VocabularyLife/server/cacheRedis"
 	"VocabularyLife/server/database/flow"
 	"encoding/json"
 	"github.com/gin-gonic/gin"
@@ -75,7 +76,7 @@ func POSTAccountLogin(ctx *gin.Context) {
 
 		if account.User == signs.User {
 			// 生成jwt
-			jwt, err := jwt.GenToken(account.User, account.Uid)
+			jwtGet, err := jwt.GenToken(account.User, account.Uid)
 			if err != nil {
 				logrus.Error("生成jwt失败--->", err)
 				ctx.JSON(http.StatusOK, HttpResult.InternalErrorFun("生成jwt失败"))
@@ -90,15 +91,18 @@ func POSTAccountLogin(ctx *gin.Context) {
 
 			// 第一次登录表缓存表数据
 			if user.Uid == "" {
-				flow.WriteUserInfo(account.Uid, datas.Ip, jwt)
+				flow.WriteUserInfo(account.Uid, datas.Ip, jwtGet)
 				logrus.Info("插入登录信息数据表")
 			} else if user.Uid == account.Uid {
 				// 说明不是第一次缓存数据了，需要刷新数据
-				flow.UpdateUserInfoIp(account.Uid, datas.Ip, jwt)
+				flow.UpdateUserInfoIp(account.Uid, datas.Ip, jwtGet)
 				logrus.Info("更新登录信息数据表")
 			}
 
-			ctx.JSON(http.StatusOK, HttpResult.Success(account, jwt))
+			// 该用户hash表对应的jwt值
+			logrus.Info("修改登录用户的jwt情况:", cacheRedis.HaseSet(account.Uid, "jwt", jwtGet))
+
+			ctx.JSON(http.StatusOK, HttpResult.Success(account, jwtGet))
 			return
 		}
 
@@ -108,6 +112,6 @@ func POSTAccountLogin(ctx *gin.Context) {
 	}
 
 	logrus.Info("具体的值-->", times, datas, signs)
-	ctx.JSON(http.StatusOK, HttpResult.ParameterErrorFun("请求的参数错误，校监失败"))
+	ctx.JSON(http.StatusOK, HttpResult.ParameterErrorFun("请求的参数错误，校验失败"))
 	return
 }

@@ -2,6 +2,7 @@ package api
 
 import (
 	"VocabularyLife/configs"
+	"VocabularyLife/expend"
 	"VocabularyLife/server/database"
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
@@ -15,10 +16,13 @@ func RoutingApi() {
 	// 定义所有中间件
 	engine.Use(cors()) // 跨域中间件
 
-	// 注册接口列表----------------
+	// TODO 注册接口列表----------------
 
 	// 注册数据库业务接口
 	database.Router(engine)
+
+	// 杂项数据接口
+	expend.Routing(engine)
 
 	// 注册列表结束---------------
 
