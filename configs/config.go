@@ -37,7 +37,7 @@ func WriteConfig() config {
 		logrus.Error("读取文件映射结构体出错")
 		panic(err)
 	}
-	logrus.Info("读取到的yaml配置文件的值----->", con)
+	// logrus.Info("读取到的yaml配置文件的值----->", con)
 	return con
 }
 

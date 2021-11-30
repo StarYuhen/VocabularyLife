@@ -3,27 +3,20 @@ AppVersion: 1000
 
 # 服务器ip，端口等内容配置
 HTTPConfig:
-  # ip地址
-  Ip: 127.0.0.1
-  # 端口号
-  Port: 10
+  Ip: 127.0.0.1   # ip地址
+  Port: 10   # 端口号
 
 # 接口加密Msg参数--重要接口
 CryptoConfig:
-  # Time字段的加密参数
-  Time: 520
-  # Data字段的加密参数
-  Data: 1314
+  Time: 520   # Time字段的加密参数
+  Data: 1314   # Data字段的加密参数
 
 
 # Captcha 生成图形验证码 --(当前拥有类型数字验证码)
 CaptchaConfig:
-# 生成的数字验证码的数字个数
-  NumberKeyLong: 6
-  # 图形验证码的宽度
-  ImgWidth: 240
-  # 图形验证码的长度
-  ImgHeight: 80
+  NumberKeyLong: 6   # 生成的数字验证码的数字个数
+  ImgWidth: 240   # 图形验证码的宽度
+  ImgHeight: 80   # 图形验证码的长度
 
 
 # mysql 数据库配置内容
@@ -36,5 +29,14 @@ MYSQLConfig:
   # 指定数据库架构内的所有数据表
   UserDBTable:  # 定义数据表数组
   - 'adminaccounts'   # 用户数据表
+  - 'userinfos' # 用户登录信息数据表
 
+# redis 缓存数据库配置 --服务器外网务必必不要开放此端口
+RedisConfig:
+  # redis的服务器地址
+  Addr: "localhost:6379"
+  Password: "" # redis的数据库密码
+  DB: 0  # redis数据库index
+  PoolSize: 100 # redis链接池，默认是4倍cpu数，这里固定 用于协程链接
+  MinIdleConns: 50  #初始规定的redis，维护，让其不少于这个数
 

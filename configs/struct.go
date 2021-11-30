@@ -2,11 +2,12 @@ package configs
 
 // 定义框架结构体
 type config struct {
-	AppVersion    int         `yaml:"AppVersion" json:"AppVersion"`
-	HTTPConfig    httplocal   `yaml:"HTTPConfig" json:"HTTPConfig"`
-	CryptoConfig  cryptolocal `yaml:"CryptoConfig" json:"CryptoConfig"`
-	CaptchaConfig captcha     `yaml:"CaptchaConfig" json:"CaptchaConfig"`
-	MysqlConfig   mysql       `yaml:"MYSQLConfig" json:"MYSQLConfig"`
+	AppVersion    int     `yaml:"AppVersion" json:"AppVersion"`
+	HTTPConfig    http    `yaml:"HTTPConfig" json:"HTTPConfig"`
+	CryptoConfig  crypto  `yaml:"CryptoConfig" json:"CryptoConfig"`
+	CaptchaConfig captcha `yaml:"CaptchaConfig" json:"CaptchaConfig"`
+	MysqlConfig   mysql   `yaml:"MYSQLConfig" json:"MYSQLConfig"`
+	RedisConfig   redis   `yaml:"RedisConfig" json:"RedisConfig"`
 }
 
 // mysql配置环境
@@ -23,13 +24,13 @@ type configMysql struct {
 }
 
 // 服务器网络配置内容
-type httplocal struct {
+type http struct {
 	Ip   string `yaml:"Ip"`
 	Port string `yaml:"Port"`
 }
 
 // 接口加密参数配置
-type cryptolocal struct {
+type crypto struct {
 	Time int `yaml:"Time"`
 	Data int `yaml:"Data"`
 }
@@ -39,4 +40,13 @@ type captcha struct {
 	NumberKeyLong int `yaml:"NumberKeyLong" json:"NumberKeyLong"`
 	ImgWidth      int `yaml:"ImgWidth" json:"ImgWidth"`
 	ImgHeight     int `yaml:"ImgHeight" json:"ImgHeight"`
+}
+
+// redis 配置
+type redis struct {
+	Addr         string `yaml:"Addr" json:"Addr"`
+	Password     string `yaml:"Password" json:"Password"`
+	DB           int    `yaml:"DB" json:"DB"`
+	PoolSize     int    `yaml:"PoolSize" json:"PoolSize"`
+	MinIdleConns int    `yaml:"MinIdleConns" json:"MinIdleConns"`
 }
