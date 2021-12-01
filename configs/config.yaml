@@ -21,8 +21,8 @@ CaptchaConfig:
 MYSQLConfig:
   # 配置顺序信息  UserConfig账号-密码-数据库架构
   UserConfig:
-    User: root
-    Password: abc123456
+    User: root # MYSQL的账号名
+    Password: abc123456 # MYSQL的密码
     Architecture: vocabularylife  #全部转为小写 VocabularyLife
   # 指定数据库架构内的所有数据表
   UserDBTable:  # 定义数据表数组
@@ -34,7 +34,7 @@ RedisConfig:
   # redis的服务器地址
   Addr: "localhost:6379"
   Password: "" # redis的数据库密码
-  # redis数据库index
+  # redis数据库 列表
   DB:
   - 0
   - 1

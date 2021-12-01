@@ -55,6 +55,7 @@ func FuncGinCaptcha() func(ctx *gin.Context) {
 		}
 
 		logrus.Info("验证码校验通过", rsacap)
+		ctx.Next()
 		// ctx.JSON(http.StatusOK, HttpResult.Success(rsacap, "提交的验证码正确"))
 
 	}

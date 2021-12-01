@@ -56,7 +56,6 @@ func PrivateKeyFun() *rsa.PrivateKey {
 func PublicKeyFun() *rsa.PublicKey {
 	block, _ := pem.Decode(public)
 	// x509解码
-
 	publicKeyInterface, err := x509.ParsePKIXPublicKey(block.Bytes)
 	if err != nil {
 		panic(err)
