@@ -66,3 +66,8 @@ func POSTAccountLogin(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, HttpResult.UnknownErrorFun("请求参数出现问题，引发未收录错误"))
 	return
 }
+
+// PostAccountEnrollment 注册用户
+func PostAccountEnrollment(ctx *gin.Context) {
+
+}

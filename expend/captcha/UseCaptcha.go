@@ -5,6 +5,7 @@ import (
 	"VocabularyLife/expend/cryptoapi"
 	"VocabularyLife/server/cacheRedis"
 	"encoding/json"
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
 	"net/http"
@@ -19,6 +20,8 @@ type RSAcaptcha struct {
 // FuncGinCaptcha  gin接口检测验证码函数--用于部分需要验证码的请求接口
 func FuncGinCaptcha() func(ctx *gin.Context) {
 	return func(ctx *gin.Context) {
+		// 初始化会话
+		session := sessions.Default(ctx)
 		var rsacap RSAcaptcha
 		// 读取规定的请求头内容
 		captcha := ctx.Request.Header.Get("captcha")
@@ -28,9 +31,19 @@ func FuncGinCaptcha() func(ctx *gin.Context) {
 
 		errcap := json.Unmarshal(capGet, &rsacap)
 
+		// 获取sessions保存的captcha的id值，做初步检测
+		captchaID := session.Get("captcha")
+
 		if errcap != nil {
 			logrus.Error("解密失败,图像验证码---", errcap)
 			ctx.JSON(http.StatusOK, HttpResult.InternalErrorFun("验证码错误，数据不对应"))
+			ctx.Abort()
+			return
+		}
+
+		if captchaID != rsacap.ID {
+			logrus.Error("会话保存的验证码id不对应---", rsacap.ID, "----", captchaID)
+			ctx.JSON(http.StatusOK, HttpResult.ParameterErrorFun("验证码ID参数错误"))
 			ctx.Abort()
 			return
 		}
