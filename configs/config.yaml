@@ -1,5 +1,7 @@
 # 全局配置文件yaml
-AppVersion: 1000
+AppVersion:
+  Backend: 1000 # 后端数据版本
+  Web: 1000 # 前端内容版本
 
 # 服务器ip，端口等内容配置
 HTTPConfig:
@@ -10,6 +12,12 @@ HTTPConfig:
 CryptoConfig:
   Time: 520   # Time字段的加密参数
   Data: 1314   # Data字段的加密参数
+  Jwt: StarYuhen # jwt加密参数和签名
+  JwtName: StarYuhen # jwt的签署名称
+  Cookie: StarYuhen # cookie和sessions加密参数
+  CookieName: VocabularyLife # cookie和sessions的储存名
+  CookieList: # Cookie储存的键名称列表
+  - 'captcha' # 图像验证码键名
 
 # Captcha 生成图形验证码 --(当前拥有类型数字验证码)
 CaptchaConfig:

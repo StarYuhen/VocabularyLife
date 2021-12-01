@@ -1,6 +1,7 @@
 package expend
 
 import (
+	"VocabularyLife/configs"
 	"VocabularyLife/expend/HttpResult"
 	"VocabularyLife/expend/captcha"
 	"VocabularyLife/server/cacheRedis"
@@ -11,6 +12,8 @@ import (
 )
 
 // 杂项---扩展 内容api
+
+var config = configs.Config.CryptoConfig
 
 // CaptChaNumber 生成数字图形验证码
 func CaptChaNumber(ctx *gin.Context) {
@@ -33,19 +36,17 @@ func CaptChaNumber(ctx *gin.Context) {
 
 	// 获取验证码都需要写入sessions --用于为账号绑定
 
-	// 当此sessions不等于空时说明已经写入过了--写入过就插入sessions值
-	if session.Get("captcha") != "" {
-		// 插入sessions值
-		session.Set("captcha", id)
-		// 保存sessions值
-		err := session.Save()
-		if err != nil {
-			logrus.Info("保存sessions失败--->", err)
-			ctx.JSON(http.StatusOK, HttpResult.UnknownErrorFun("保存验证码数据失败，请刷新"))
-			return
-		}
-		logrus.Info("保存的captcha的id--->", id)
+	// 无论如何访问此接口都会刷新session值
+	// 插入sessions值
+	session.Set(config.CookieList[0], id)
+	// 保存sessions值
+	err := session.Save()
+	if err != nil {
+		logrus.Info("保存sessions失败--->", err)
+		ctx.JSON(http.StatusOK, HttpResult.UnknownErrorFun("保存验证码数据失败，请刷新"))
+		return
 	}
+	logrus.Info("保存的captcha的id--->", id)
 
 	ctx.JSON(http.StatusOK, HttpResult.Success(cat, "请求captcha成功"))
 }

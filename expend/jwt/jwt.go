@@ -1,6 +1,7 @@
 package jwt
 
 import (
+	"VocabularyLife/configs"
 	"errors"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
@@ -15,6 +16,8 @@ import (
 // 我们这里需要额外记录一个username字段，所以要自定义结构体
 // 如果想要保存更多信息，都可以添加到这个结构体中
 
+var config = configs.Config.CryptoConfig
+
 // JwtPO 自定义jwt参数
 type jwtPO struct {
 	User string `json:"user"`
@@ -25,7 +28,7 @@ type jwtPO struct {
 // TokenExpireDuration 设置为100天，一次用户登录有效期
 const TokenExpireDuration = time.Hour * 2400
 
-var MySecret = []byte("StarYuhen")
+var MySecret = []byte(config.Jwt)
 
 // GenToken 生成JWT
 func GenToken(user string, uid string) (string, error) {
@@ -35,7 +38,7 @@ func GenToken(user string, uid string) (string, error) {
 		uid,
 		jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(TokenExpireDuration).Unix(),
-			Issuer:    "StarYuhen",
+			Issuer:    config.JwtName,
 		},
 	}
 
