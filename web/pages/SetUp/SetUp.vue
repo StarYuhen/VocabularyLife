@@ -130,7 +130,7 @@
 				<text id="DailyLearningTextCopyright"  >Words lnc Copyright 2021</text>
 				<u-link id="DailyLearningTextCopyright"  href="http://www.yuhenm.com">加入我们</u-link>
 			</view>
-			
+			 
 
 		</view>
 
