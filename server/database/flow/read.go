@@ -1,10 +1,10 @@
 package flow
 
 // SelectAccount 查询指定用户结果内容
-func SelectAccount(user string, password string) adminaccount {
+func SelectAccount(user string, password string) (adminaccount, error) {
 	var account adminaccount
-	db.Where("user=? and passWord=?", user, password).First(&account)
-	return account
+	err := db.Where("user=? and passWord=?", user, password).First(&account).Error
+	return account, err
 }
 
 // ReadUserInfo 查询登录信息表是否有当前字段

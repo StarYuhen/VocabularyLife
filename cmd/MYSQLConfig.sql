@@ -42,6 +42,7 @@ alter table adminaccounts
     modify uid varchar(512) not null;
 
 
+
 # 关联主表的用户登录信息记录表
 create table userinfos
 (
