@@ -13,7 +13,11 @@
 					:src="Account.SrcLogin" :lazy-load="true" :fade="true" duration="450">
 					<u-loading slot="loading"></u-loading>
 					<view slot="error" style="font-size: 24rpx;">加载失败</view>
+<<<<<<< Updated upstream
 					</u-image>
+=======
+					</u-image>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+>>>>>>> Stashed changes
 				<view class="TextSetup">
 					<text id="SetUpName">{{Account.TextName}}</text>
 					<view class="TextDataSetUp">
@@ -88,14 +92,6 @@
 		<view class="LearningSettings">
 			<text id="LearningText">学习情况</text>
 		</view>
-		
-		
-		
-
-
-
-
-
 		<!-- 单词上限 -->
 		<view class="LearningSettings">
 			<text id="LearningText">其他设置</text>
@@ -132,7 +128,7 @@
 			<view class="DailyLearningTextClass-bottom">
 				<text id="DailyLearningTextCopyright"  >Words dictionary V1.0.00 (0000) RLC</text>
 				<text id="DailyLearningTextCopyright"  >Words lnc Copyright 2021</text>
-				<text id="DailyLearningTextCopyright"  >加入我们</text>
+				<u-link id="DailyLearningTextCopyright"  href="http://www.yuhenm.com">加入我们</u-link>
 			</view>
 			
 
