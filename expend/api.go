@@ -47,6 +47,5 @@ func CaptChaNumber(ctx *gin.Context) {
 		return
 	}
 	logrus.Info("保存的captcha的id--->", id)
-
 	ctx.JSON(http.StatusOK, HttpResult.Success(cat, "请求captcha成功"))
 }
