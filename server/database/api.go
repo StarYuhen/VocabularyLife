@@ -33,8 +33,8 @@ func POSTAccountLogin(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, HttpResult.NotOwnedFun("请求的用户不存在"))
 		return
 	}
-
-	if w.Admin.User == sign.User {
+	logrus.Info(w.Admin)
+	if w.Admin.User == sign.User && w.Admin.Password == sign.PassWord {
 		// 生成jwt
 		jwtGet, err := jwt.GenToken(w.Admin.User, w.Admin.Uid)
 		if err != nil {
@@ -66,7 +66,7 @@ func POSTAccountLogin(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(http.StatusOK, HttpResult.UnknownErrorFun("请求参数出现问题，引发未收录错误"))
+	ctx.JSON(http.StatusOK, HttpResult.ParameterErrorFun("请求参数出现问题，请检查参数是否正常"))
 	return
 }
 
@@ -116,11 +116,18 @@ func PostAccountUpdateImgurl(ctx *gin.Context) {
 	var w flow.WriteIO
 	user := ctx.MustGet("user").(string)
 	var enrollment Enrollment
-	if err := ctx.Bind(&enrollment); err != nil {
+
+	if err := ctx.ShouldBind(&enrollment); err != nil {
 		logrus.Error("传输绑定数据失败", err)
 		ctx.JSON(http.StatusOK, HttpResult.ParameterErrorFun("更新头像失败"))
 		return
 	}
+
+	if enrollment.Imgurl == "" {
+		ctx.JSON(http.StatusOK, HttpResult.ParameterErrorFun("没有头像地址，更新账号头像失败"))
+		return
+	}
+
 	w.SelectAccountUser(user)
 	w.UpdateAdminAccountImgurl(enrollment.Imgurl)
 	if w.Admin.ImgUrl != "" && w.Admin.ImgUrl == enrollment.Imgurl {
@@ -128,6 +135,7 @@ func PostAccountUpdateImgurl(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, HttpResult.Success(enrollment, "更新头像成功"))
 		return
 	}
+
 	ctx.JSON(http.StatusOK, HttpResult.InternalErrorFun("更新头像失败"))
 }
 
@@ -136,9 +144,14 @@ func PostAccountPassWord(ctx *gin.Context) {
 	var w flow.WriteIO
 	user := ctx.MustGet("user").(string)
 	var pass PostAccountPassword
-	if err := ctx.Bind(&pass); err != nil {
+	if err := ctx.ShouldBind(&pass); err != nil {
 		logrus.Error("传输绑定数据失败", err)
 		ctx.JSON(http.StatusOK, HttpResult.ParameterErrorFun("更新头像失败"))
+		return
+	}
+
+	if pass.Password == "" {
+		ctx.JSON(http.StatusOK, HttpResult.ParameterErrorFun("没有账号密码，更新账号密码失败"))
 		return
 	}
 

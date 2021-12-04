@@ -19,7 +19,7 @@ func (w *WriteIO) UpdateUserInfoIp(ip, jwt string) {
 func (w *WriteIO) UpdateAdminAccountImgurl(imgurl string) {
 	var admin adminaccount
 	admin.User = w.Admin.User
-	err := db.Model(&admin).Select("imgUrl").Updates(map[string]string{"imgUrl": imgurl}).Error
+	err := db.Model(&admin).Where("uid=?", w.Admin.Uid).Select("imgUrl").Updates(map[string]interface{}{"imgUrl": imgurl}).Error
 	logrus.Info("更新账号头像-->", err)
 	if err == nil {
 		w.Admin.ImgUrl = imgurl
@@ -30,7 +30,7 @@ func (w *WriteIO) UpdateAdminAccountImgurl(imgurl string) {
 func (w *WriteIO) UpdateAdminAccountPassword(password string) {
 	var admin adminaccount
 	admin.User = w.Admin.User
-	err := db.Model(&admin).Select("passWord").Updates(map[string]interface{}{"passWord": password}).Error
+	err := db.Model(&admin).Where("uid=?", w.Admin.Uid).Select("passWord").Updates(map[string]interface{}{"passWord": password}).Error
 	logrus.Info("更新主账号密码-->", err)
 	if err == nil {
 		w.Admin.Password = password
