@@ -7,3 +7,9 @@ type Enrollment struct {
 	UserName string `json:"username"`
 	Imgurl   string `json:"imgurl"`
 }
+
+// PostAccountPassword 请求注册列表
+type PostAccountPassword struct {
+	UserName string `json:"username"`
+	Password string `json:"password"`
+}
