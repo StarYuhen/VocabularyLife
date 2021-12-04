@@ -29,17 +29,6 @@ type userinfo struct {
 
 // WriteIO 用于集合数据库流程--只限于查询和更新
 type WriteIO struct {
-	Admin       adminaccount
-	UserInfo    userinfo
-	UpdateInter UpdateInterface
-}
-
-// UpdateInterface  每一次执行更新和查询主次都需要检查是否存在
-type UpdateInterface interface {
-	selectAccount(user string, password string) bool
-	ReadUserInfo() bool
-	SelectAccountUser(user string) bool
-	UpdateUserInfoIp(ip, jwt string) error
-	UpdateAdminAccount(imgurl string) error
-	UpdateAdminAccountPassword(password string) error
+	Admin    adminaccount
+	UserInfo userinfo
 }

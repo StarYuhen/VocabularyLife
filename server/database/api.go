@@ -139,7 +139,7 @@ func PostAccountUpdateImgurl(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, HttpResult.InternalErrorFun("更新头像失败"))
 }
 
-// PostAccountPassWord 更新主账号密码
+// PostAccountPassWord 更新账号密码
 func PostAccountPassWord(ctx *gin.Context) {
 	var w flow.WriteIO
 	user := ctx.MustGet("user").(string)
@@ -164,4 +164,31 @@ func PostAccountPassWord(ctx *gin.Context) {
 	}
 
 	ctx.JSON(http.StatusOK, HttpResult.InternalErrorFun("更新密码失败"))
+}
+
+// PostAccountUserName 更新账号昵称
+func PostAccountUserName(ctx *gin.Context) {
+	var w flow.WriteIO
+	user := ctx.MustGet("user").(string)
+	var pass PostAccountPassword
+	if err := ctx.ShouldBind(&pass); err != nil {
+		logrus.Error("传输绑定数据失败", err)
+		ctx.JSON(http.StatusOK, HttpResult.ParameterErrorFun("更新头像失败"))
+		return
+	}
+
+	if pass.Password == "" {
+		ctx.JSON(http.StatusOK, HttpResult.ParameterErrorFun("没有账号密码，更新账号密码失败"))
+		return
+	}
+
+	w.SelectAccountUser(user)
+	w.UpdateAdminAccountUserName(pass.UserName)
+
+	if w.Admin.UserName == pass.UserName {
+		ctx.JSON(http.StatusOK, HttpResult.Success(pass, "更新账号昵称成功"))
+		return
+	}
+
+	ctx.JSON(http.StatusOK, HttpResult.InternalErrorFun("更新账号昵称失败"))
 }

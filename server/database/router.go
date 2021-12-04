@@ -19,4 +19,6 @@ func Router(engine *gin.Engine) {
 	engine.POST("/api/public/account/imgurl", jwt.AuthMiddlewareJWT(), PostAccountUpdateImgurl)
 	// 更新账号密码
 	engine.POST("/api/public/account/password", jwt.AuthMiddlewareJWT(), PostAccountPassWord)
+	// 更新账号昵称
+	engine.POST("/api/public/account/username", jwt.AuthMiddlewareJWT(), PostAccountUserName)
 }
